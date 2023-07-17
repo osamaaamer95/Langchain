@@ -2,26 +2,26 @@ from ZeroToHero.ConversationChain import generate_conversation
 from ZeroToHero.DeepLake import DeepLakeAgent
 from ZeroToHero.GoogleSearchLangChain import GoogleSearchAgent
 from ZeroToHero.LLMChain import generate_company_names
-from enums import Model
+from enums import OpenAIModel
 from ZeroToHero.SimpleAPICall import generate_openai_response
 
 ######
 # Call a GPT model with a temperature and a prompt
 ######
 
-print(generate_openai_response(Model.GPT3, 0.7, "Hello world!"))
+print(generate_openai_response(OpenAIModel.DAVINCI_3, 0.7, "Hello world!"))
 
 ######
 # Simple prompt template to generate a company name based on a prompt
 ######
 
-print(generate_company_names(Model.GPT2, 0.4, "blueberry icecream"))
+print(generate_company_names(OpenAIModel.DAVINCI_2, 0.4, "blueberry icecream"))
 
 ######
 # Simple conversation with buffer memory
 ######
 
-generate_conversation(Model.GPT3, 0.7)
+generate_conversation(OpenAIModel.DAVINCI_3, 0.7)
 
 ######
 # Add documents to deep lake and ask questions using a LLM model
@@ -34,7 +34,7 @@ texts = [
     "Michael Jeffrey Jordan was born in 17 February 1963"
 ]
 
-deeplake_agent = DeepLakeAgent(Model.GPT3, 0)
+deeplake_agent = DeepLakeAgent(OpenAIModel.DAVINCI_3, 0)
 
 deeplake_agent.add_documents_to_deeplake(texts)
 
@@ -47,5 +47,5 @@ deeplake_agent.ask_question_from_deeplake("When was Michael Jordan born?")
 ######
 
 question = "What's the latest news about the Mars rover? Then please summarize the results for me."
-google_agent = GoogleSearchAgent(Model.GPT3, 0)
+google_agent = GoogleSearchAgent(OpenAIModel.DAVINCI_3, 0)
 google_agent.ask_question(question)

@@ -2,10 +2,10 @@ from langchain.prompts import PromptTemplate
 from langchain.llms import OpenAI
 from langchain.chains import LLMChain
 
-from enums import Model
+from enums import OpenAIModel
 
 
-def generate_company_names(model: Model, temperature: float, query: str):
+def generate_company_names(model: OpenAIModel, temperature: float, query: str):
     # get reference to the llm we want to use
     llm = OpenAI(model=model.value, temperature=temperature)
 

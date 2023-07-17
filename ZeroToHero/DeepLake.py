@@ -8,11 +8,11 @@ from langchain.vectorstores import DeepLake
 from langchain.agents import initialize_agent, Tool
 from langchain.agents import AgentType
 
-from enums import Model
+from enums import OpenAIModel
 
 
 class DeepLakeAgent:
-    def __init__(self, model: Model, temperature: float):
+    def __init__(self, model: OpenAIModel, temperature: float):
         self.llm = OpenAI(model=model.value, temperature=temperature)
         self.embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
         activeloop_org_id = environ.get("ACTIVELOOP_ORG_ID")

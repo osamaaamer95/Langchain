@@ -5,11 +5,11 @@ from langchain.agents import initialize_agent
 from langchain.llms import OpenAI
 from langchain.utilities import GoogleSearchAPIWrapper
 
-from enums import Model
+from enums import OpenAIModel
 
 
 class GoogleSearchAgent:
-    def __init__(self, model: Model, temperature: float):
+    def __init__(self, model: OpenAIModel, temperature: float):
         self.llm = OpenAI(model=model.value, temperature=temperature)
         self.search = GoogleSearchAPIWrapper()
         self.summarize_chain = LLMChain(llm=self.llm, prompt=PromptTemplate(

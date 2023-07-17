@@ -2,10 +2,10 @@ from langchain import ConversationChain
 from langchain.llms import OpenAI
 from langchain.memory import ConversationBufferMemory
 
-from enums import Model
+from enums import OpenAIModel
 
 
-def generate_conversation(model: Model, temperature: float):
+def generate_conversation(model: OpenAIModel, temperature: float):
     # get reference to the llm we want to use
     llm = OpenAI(model=model.value, temperature=temperature)
 
