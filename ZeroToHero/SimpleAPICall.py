@@ -7,5 +7,4 @@ def generate_openai_response(model: Model, temperature: float, prompt: str):
     llm = OpenAI(model=model.value, temperature=temperature)
 
     # generate and print the output
-    output = (llm(prompt))
-    return output
+    return llm(prompt)
