@@ -1,0 +1,3 @@
+from IntroToLLMs.tracking_token_usage import tell_joke_and_track_usage
+
+tell_joke_and_track_usage()
