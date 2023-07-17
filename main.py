@@ -1,16 +1,41 @@
-# This is a sample Python script.
+from ZeroToHero.ConversationChain import generate_conversation
+from ZeroToHero.DeepLake import DeepLakeAgent
+from ZeroToHero.LLMChain import generate_company_names
+from enums import Model
+from ZeroToHero.SimpleAPICall import generate_openai_response
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+# ######
+# # Call a GPT model with a temperature and a prompt
+# ######
+#
+# print(generate_openai_response(Model.GPT3, 0.7, "Hello world!"))
+#
+# ######
+# # Simple prompt template to generate a company name based on a prompt
+# ######
+#
+# print(generate_company_names(Model.GPT2, 0.4, "blueberry icecream"))
+#
+# ######
+# # Simple conversation with buffer memory
+# ######
+#
+# generate_conversation(Model.GPT3, 0.7)
 
+######
+# Add documents to deep lake and ask questions using a LLM model
+######
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+texts = [
+    "Napoleon Bonaparte was born in 15 August 1769",
+    "Louis XIV was born in 5 September 1638",
+    "Lady Gaga was born in 28 March 1986",
+    "Michael Jeffrey Jordan was born in 17 February 1963"
+]
 
+my_Agent = DeepLakeAgent(Model.GPT3, 0)
+# my_Agent.add_documents_to_deeplake(texts)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+my_Agent.ask_question_from_deeplake("When was Napoleon born?")
+my_Agent.ask_question_from_deeplake("When was Lady Gaga born?")
+my_Agent.ask_question_from_deeplake("When was Michael Jordan born?")
