@@ -1,0 +1,11 @@
+from Prompts.FewShot.few_shot_prompting import using_few_shot_prompting
+from Prompts.FewShot.length_based_few_shot import using_dynamic_few_shot
+from Prompts.FewShot.semantic_similarity_selector import using_semantic_similarity
+from Prompts.chain_prompting import using_chained_prompt
+from Prompts.simple_prompt import using_simple_prompt
+
+using_simple_prompt()
+using_few_shot_prompting()
+using_chained_prompt()
+using_dynamic_few_shot()
+using_semantic_similarity()
