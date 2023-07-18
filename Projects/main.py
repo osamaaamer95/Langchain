@@ -10,5 +10,3 @@ from Projects.PDFReader.pdf_reader import summarize_pdf
 dir_path = os.path.dirname(os.path.realpath(__file__))
 # summarize PDF
 summarize_pdf(dir_path + "/PDFReader/resume.pdf")
-
-
