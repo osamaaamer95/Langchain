@@ -1,3 +1,5 @@
 /environment.env
 
 *.pdf
+
+*.bin
