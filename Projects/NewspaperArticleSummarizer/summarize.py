@@ -1,13 +1,12 @@
 from langchain.schema import (
-    HumanMessage
+    SystemMessage, HumanMessage
 )
 from langchain.chat_models import ChatOpenAI
 
 
 def get_messages(article):
     # prepare template for prompt
-    template = """You are an assistant that summarizes online articles.
-    
+    template = """    
     Here's the article you will summarize:
     
     ==================
@@ -16,12 +15,15 @@ def get_messages(article):
     {article_text}
     ==================
     
-    Write a summary for this article.
+    Write a summary for this article as a bulleted list.
     """
 
     prompt = template.format(article_title=article['title'], article_text=article['text'])
 
-    return [HumanMessage(content=prompt)]
+    return [
+        SystemMessage(content="You are an assistant that summarizes online articles."),
+        HumanMessage(content=prompt)
+    ]
 
 
 def summarize(article):
