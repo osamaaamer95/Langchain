@@ -3,3 +3,10 @@
 *.pdf
 
 *.bin
+
+*.html
+
+
+Projects/RelationExtraction/lib/
+
+.DS_Store
