@@ -10,3 +10,5 @@
 Projects/RelationExtraction/lib/
 
 .DS_Store
+
+*.txt
