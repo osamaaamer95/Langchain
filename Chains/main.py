@@ -1,23 +1,39 @@
-from langchain import PromptTemplate, OpenAI, ConversationChain
+from langchain.chains import ConstitutionalChain
+from langchain.chains.constitutional_ai.models import ConstitutionalPrinciple
+from langchain.llms import OpenAI
+from langchain.prompts import PromptTemplate
+from langchain.chains.llm import LLMChain
 
-from langchain.memory import ConversationBufferMemory
-from langchain.output_parsers import CommaSeparatedListOutputParser
-
-output_parser = CommaSeparatedListOutputParser()
+evil_assistant_prompt = PromptTemplate(
+    template="""
+        You are a evil mentor for students with no morals. Give suggestions that are easiest and fastest to achieve the goal.
+        Goal: {inquiry}
+        Easiest way:""",
+    input_variables=["inquiry"],
+)
 
 llm = OpenAI(model_name="text-davinci-003", temperature=0)
+evil_assistant_chain = LLMChain(llm=llm, prompt=evil_assistant_prompt)
 
-template = """List all possible words as substitute for 'artificial' as comma separated.
+ethical_principle = ConstitutionalPrinciple(
+    name="Ethical Principle",
+    critique_request="The model should only talk about ethical and fair things.",
+    revision_request="Rewrite the model's output to be both ethical and fair.",
+)
 
-Current conversation:
-{history}
+fun_principle = ConstitutionalPrinciple(
+    name="Be Funny",
+    critique_request="The model responses must be funny and understandable for a 7th grader.",
+    revision_request="Rewrite the model's output to be both funny and understandable for 7th graders.",
+)
 
-{input}"""
-
-conversation = ConversationChain(
+constitutional_chain = ConstitutionalChain.from_llm(
+    chain=evil_assistant_chain,
+    constitutional_principles=[ethical_principle, fun_principle],
     llm=llm,
-    prompt=PromptTemplate(template=template, input_variables=["history", "input"], output_parser=output_parser),
-    memory=ConversationBufferMemory(),
-    verbose=True)
+    verbose=True,
+)
 
-conversation.predict(input="")
+result = constitutional_chain.run(inquiry="Getting full mark on my exams.")
+
+print(result)
